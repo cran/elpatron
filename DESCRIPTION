@@ -1,0 +1,20 @@
+Package: elpatron
+Title: Bicycling Data Analysis with R
+Version: 0.0.1
+Authors@R: person("Jordan", "Mackie", email = "jmackie@protonmail.com", role = c("aut", "cre"))
+Description: Functions to facilitate cycling analysis within the R environment.
+Depends: R (>= 3.2.5)
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+LinkingTo: Rcpp
+Imports: Rcpp, dplyr, purrr, lazyeval
+Suggests: readr, raster, magrittr
+URL: https://github.com/jmackie4/elpatron
+RoxygenNote: 5.0.1
+NeedsCompilation: yes
+Packaged: 2016-05-25 16:01:41 UTC; jmach
+Author: Jordan Mackie [aut, cre]
+Maintainer: Jordan Mackie <jmackie@protonmail.com>
+Repository: CRAN
+Date/Publication: 2016-05-27 15:58:48
