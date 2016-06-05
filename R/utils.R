@@ -98,6 +98,17 @@ semicircle_correct <- function(position) {
   (position * 180 / 2 ^ 31 + 180) %% 360 - 180
 }
 
+# Transfer only atypical attributes.
+`transfer_attrs<-` <- function(new_tbl, value) {
+  old_attrs <- value  # Comes from `attributes`.
+  new_attrs <- attributes(new_tbl)
+  novel_attrs <- names(old_attrs)[
+    names(old_attrs) %notin% c("names","row.names", "class")
+    ]
+  attributes(new_tbl)[novel_attrs] <- old_attrs[novel_attrs]
+  new_tbl
+}
+
 # EXPORTED -------------------------------------------------
 
 #' Faster base::diff
@@ -107,7 +118,7 @@ semicircle_correct <- function(position) {
 #' @param x a numeric vector containing the values to be differenced.
 #'
 #' @return A vector of \code{length(x)}, the first value being 0. This behaviour
-#'   differs from \code{\link[base]{diff}}, were the length would be
+#'   differs from \code{\link[base]{diff}}, where the length would be
 #'   \code{length(x) - 1} (omitting the zero).
 #'
 #' @export

@@ -19,6 +19,9 @@
 #' @param empty_fill the value with which to "fill" new rows in the returned
 #'   data. For most purposes this should be either \code{NA} or a numeric value.
 #'
+#' @return a consistently sampled \code{\link[dplyr]{tbl_df}}, with the
+#'   appropriate \code{deltat} attribute.
+#'
 #' @examples
 #' gappy_data <- data.frame(
 #'   timer.s = c(1:100, 201:300),
@@ -28,11 +31,12 @@
 #' unif <- uniform_sampling(gappy_data, ~timer.s, empty_fill = NA)
 #' head(unif)
 #' @export
-uniform_sampling <- function(.data, time_column, deltat = NULL, empty_fill = 0L) {
+uniform_sampling <- function(.data, time_column = "time.s",
+                             deltat = NULL, empty_fill = 0L) {
 
   # To be restored later...
   ocolnames <- colnames(.data)
-  #oattr <- attributes(.data)
+  oattr <- attributes(.data)
 
   if (is_formula(time_column)) {  # NSE.
     time_column <- deparse(time_column[[2]])
@@ -66,7 +70,11 @@ uniform_sampling <- function(.data, time_column, deltat = NULL, empty_fill = 0L)
   time_column <- match(time_column, colnames(out)) # Make numeric.
 
   out[-time_column] <- lapply(out[-time_column], "[<-", added_vals, empty_fill)
+
+  # Handle attributes.
   colnames(out) <- ocolnames
+  transfer_attrs(out) <- oattr
+  attr(out, "deltat") <- deltat
 
   out
 }

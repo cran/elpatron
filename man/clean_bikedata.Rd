@@ -11,6 +11,10 @@ clean_bikedata(data, ...)
 
 \item{...}{arguments to be passed down to \code{\link[dplyr]{select}}.}
 }
+\value{
+a \code{\link[dplyr]{tbl_df}} with the column structure as described
+  above, with a \code{"start_time"} attribute appended where available.
+}
 \description{
 These functions implement a consistent and predictable column
   structure for incoming cycling device data. This should permit, where
@@ -88,9 +92,9 @@ clean_bikedata(parsed_ride)
 ## Keep the lap column:
 clean_bikedata(parsed_ride, lap)
 
-## We can also make use of the special dplyr::select
-## functions.
-clean_bikedata(parsed_ride, lap, contains("temperature"))
+## We can also make use of the special
+## dplyr::select functions.
+clean_bikedata(parsed_ride, lap, contains("torque"))
 
 ## Trying to hold on to non-existent fields won't throw errors.
 clean_bikedata(parsed_ride, lap, contains("epo_concentration"))

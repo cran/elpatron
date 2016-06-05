@@ -4,7 +4,8 @@
 \alias{uniform_sampling}
 \title{Make rows uniform}
 \usage{
-uniform_sampling(.data, time_column, deltat = NULL, empty_fill = 0L)
+uniform_sampling(.data, time_column = "time.s", deltat = NULL,
+  empty_fill = 0L)
 }
 \arguments{
 \item{.data}{data.frame; the data to be made uniform on the basis of
@@ -20,6 +21,10 @@ data. If \code{NULL} (default), a guess is made via
 
 \item{empty_fill}{the value with which to "fill" new rows in the returned
 data. For most purposes this should be either \code{NA} or a numeric value.}
+}
+\value{
+a consistently sampled \code{\link[dplyr]{tbl_df}}, with the
+  appropriate \code{deltat} attribute.
 }
 \description{
 A useful function for working with data that aren't sampled at

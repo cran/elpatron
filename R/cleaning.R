@@ -22,6 +22,9 @@
 #' @param data data.frame to be "cleaned".
 #' @param ... arguments to be passed down to \code{\link[dplyr]{select}}.
 #'
+#' @return a \code{\link[dplyr]{tbl_df}} with the column structure as described
+#'   above, with a \code{"start_time"} attribute appended where available.
+#'
 #' @examples
 #' ride_file <- system.file("extdata/lufbra.fit", package = "elpatron")
 #'
@@ -33,9 +36,9 @@
 #' ## Keep the lap column:
 #' clean_bikedata(parsed_ride, lap)
 #'
-#' ## We can also make use of the special dplyr::select
-#' ## functions.
-#' clean_bikedata(parsed_ride, lap, contains("temperature"))
+#' ## We can also make use of the special
+#' ## dplyr::select functions.
+#' clean_bikedata(parsed_ride, lap, contains("torque"))
 #'
 #' ## Trying to hold on to non-existent fields won't throw errors.
 #' clean_bikedata(parsed_ride, lap, contains("epo_concentration"))
@@ -126,7 +129,7 @@ clean_bikedata.tcx <- function(data, ...) {
 #' @export
 clean_bikedata.gpx <- function(data, ...) {
   instructions <- list(
-    time.s      = time ~ posix_to_timer(time),
+    time.s      = time ~ posix_to_timer(timestamp.posix),
     lon         = . ~ lon,
     lat         = . ~ lat,
     distance.km = ~NA,
@@ -174,12 +177,14 @@ clean_bikedata.default <- function(data, ...) {
 
 # ---------------------------------------------------------------------
 cleaner <- function(data, instructions, ...) {
+  oattr <- attributes(data)  # Restore later.
+
   .instr <- parse_instructions(instructions)
   # Unpack (because it looks nicer)...
   needs    <- .instr$needs
   new_cols <- .instr$new_columns
 
-  available <- purrr::map_lgl(needs, `%in%`, names(data))
+  available <- map_lgl(needs, `%in%`, names(data))
   new_cols[!available] <- NA  # Will recycle in the data_frame.
 
   out <- dplyr::transmute_(data, .dots = new_cols)  # Drops old columns.
@@ -191,8 +196,15 @@ cleaner <- function(data, instructions, ...) {
     out <- dplyr::bind_cols(out, extra_columns)
   }
 
-  # Returned.
-  dplyr::filter_(out, ~time.s != 0)  # See column_spec.
+  out <- dplyr::filter_(out, ~time.s != 0)  # See column_spec.
+
+  # Handle attributes.
+  transfer_attrs(out) <- oattr
+  if (!is.null(data$timestamp.posix)) {
+    attr(out, "start_time") <- data$timestamp.posix[1]
+  }
+
+  out
 }
 
 parse_instructions <- function(instructions) {
