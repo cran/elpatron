@@ -21,7 +21,8 @@
 #'
 #' @useDynLib elpatron
 #' @importFrom Rcpp sourceCpp
-#' @importFrom dplyr tbl_df %>%
+#' @importFrom dplyr tbl_df
+#' @importFrom magrittr %>%
 #' @importFrom purrr map map_lgl map_dbl map_df
 #' @importFrom lazyeval lazy_dots
 #'
@@ -43,7 +44,8 @@ NULL
 # Notes to self:
 #
 # + pugixml needs to be in header-only mode
-# + I've included all files from the FIT SDK cpp dir, but this might not be
-#   necessary.
+# + I've included all files from the FIT SDK cpp dir, but this is
+#   probably overkill. I need some way to figure out what is actually
+#   being used.
 # + CMD check doesn't like *.hpp file extensions, use *.h (e.g with
 #   a project-wide find && replace).
