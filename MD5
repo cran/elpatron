@@ -1,10 +1,10 @@
-1d6a59d728f94f8842d1ab674d68b472 *DESCRIPTION
+c449b5aea203402efb7439391a5838a6 *DESCRIPTION
 c135f7576c12150208bd34e7569a1348 *LICENSE
 c168a069aaccd8753488c958af7454aa *NAMESPACE
-71132255546d6c040a4b561ad881b128 *NEWS.md
+7c30d26f3ed869a04a184376b648c8e6 *NEWS.md
 718d9ce484079410f6e13e9678773ba7 *R/RcppExports.R
 01f6297a34b276559a1a79ba42e79c53 *R/Wprime.R
-7d702fb1affc1b7d481640c4c014506e *R/cleaning.R
+dd567a6e7ee927bbb20e7d2a3e11e330 *R/cleaning.R
 84c300ea609790f70f0a07028c61485f *R/data-doc.R
 cf657f1804a64d07bb0b8dab9d1af0c6 *R/elevation_correct.R
 addfe8d7fcb990b83a1944ab072f733c *R/elpatron-package.R
@@ -28,7 +28,7 @@ d367ae168211b180864d1239c3960250 *inst/licenses/FIT_license.txt
 ebe9efce9b0d433f921246fbd31ea4db *man/Cumsum.Rd
 9185e9bad3c3506e6c742a3d2e75ea41 *man/Diff.Rd
 872642940b72973a167e05ca999113a9 *man/Wbalance.Rd
-c63ae5e08ac21007de3196f1858f46cb *man/clean_bikedata.Rd
+3ba227ea476d765cdc6d00edcba808b8 *man/clean_bikedata.Rd
 2c8494588deaa55edcc0f81dfd3be218 *man/cyclingdata.Rd
 242446c34427812eb0eaa507968bec79 *man/deltat_guess.Rd
 f57fa8a9fbd7f568e44fd5531f36b355 *man/elevation_correct.Rd
@@ -42,7 +42,7 @@ abc34a0e5c9cf7b6509dc86e747324be *man/import_ride.Rd
 2c17a59d2a41d4ed42a741ca16030901 *man/uniform_sampling.Rd
 50afe642885497529696a813c60536c8 *src/RcppExports.cpp
 97994c48a06bfb154750b08a840047a8 *src/Rcpp_utils.cpp
-906b7c40f039317cb76b61f65fcfc2c6 *src/W_prime_expenditure.cpp
+9cceafc0f254b1a920ea07ebc55346ee *src/W_prime_expenditure.cpp
 79dcd9834a58c049271c492cb74da600 *src/fit.cpp
 f3d9fac8a0135a4e881c4977c9114e96 *src/fit.h
 246e813413112e23f9e7d75041a04c46 *src/fit_accelerometer_data_mesg.h
